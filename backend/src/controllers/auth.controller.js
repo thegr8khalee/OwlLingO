@@ -1,6 +1,7 @@
 import User from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
 import { generateToken } from '../lib/utils.js';
+import cloudinary from '../lib/cloudinary.js';
 
 export const signup = async (req, res) => {
   const { fullName, email, password, nativeLang, langToLearn } = req.body;
@@ -103,5 +104,40 @@ export const logout = (req, res) => {
   } catch (error) {
     console.log('Eror logout controller: ', error.maessage);
     res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+export const updateProfile = async (req, res) => {
+  try {
+    const { profilePic, nativeLang, langToLearn } = req.body;
+    const userId = req.user._id;
+
+    const updateData = {};
+
+    if (profilePic) {
+      const uploadResponse = await cloudinary.uploader.upload(profilePic);
+      updateData.profilePic = uploadResponse.secure_url;
+    }
+
+    if (nativeLang) updateData.nativeLang = nativeLang;
+    if (langToLearn) updateData.langToLearn = langToLearn;
+
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
+      new: true,
+    });
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error('Error in update profile controller:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+export const checkAuth = (req, res) => {
+  try {
+    res.status(200).json(req.user);
+  } catch (error) {
+    console.log('Error in Check Auth controller: ', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
