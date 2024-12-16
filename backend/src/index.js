@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import { connectDB } from './lib/db.js';
 import cookieParser from 'cookie-parser';
 import messageRoutes from "./routes/message.route.js"
-import userRoutes from "./routes/user.route.js"
+import freindRoutes from "./routes/freind.route.js"
 
 dotenv.config();
 const app = express();
@@ -13,7 +13,7 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/message', messageRoutes);
-app.use('/api/freinds', userRoutes);
+app.use('/api/freinds', freindRoutes);
 
 const PORT = process.env.PORT || 5001;
 
