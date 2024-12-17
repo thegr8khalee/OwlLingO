@@ -1,4 +1,4 @@
-import User from '../models/user.model';
+import User from '../models/user.model.js';
 
 export const searchUsers = async (req, res) => {
   try {
@@ -16,7 +16,17 @@ export const searchUsers = async (req, res) => {
       _id: { $ne: myId },
     }).select(-'password');
 
-    res.status(200).json(result);
+    res.status(200).json(
+      result.map((user) => ({
+        _id: user._id,
+        email: user.email,
+        fullName: user.fullName,
+        profilePic: user.profilePic,
+        nativeLang: user.nativeLang,
+        langToLearn: user.langToLearn,
+        createdAt: user.createdAt,
+      }))
+    );
   } catch (error) {
     console.error('Error in search:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -63,8 +73,8 @@ export const acceptRequest = async (req, res) => {
     const user = await User.findByIdAndUpdate(
       myId,
       {
-        $pull: { friendReq: senderId },
         $addToSet: { friends: senderId },
+        $pull: { friendReq: senderId },
       },
       { new: true }
     );

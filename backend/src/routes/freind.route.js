@@ -1,11 +1,11 @@
 import express from 'express';
-import { protectRoute } from '../middleware/protetctRoute.middleware';
+import { protectRoute } from '../middleware/protetctRoute.middleware.js';
 import {
   searchUsers,
   sendRequest,
   acceptRequest,
   delRequest,
-} from '../controllers/freinds.controller';
+} from '../controllers/freinds.controller.js';
 
 const router = express.Router();
 

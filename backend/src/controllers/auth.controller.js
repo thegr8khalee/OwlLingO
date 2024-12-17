@@ -13,10 +13,10 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: 'email cant be empty' });
     }
     if (!password) {
-      return res.send(400).json({ message: 'password cant be empty' });
+      return res.status(400).json({ message: 'password cant be empty' });
     }
     if (!nativeLang) {
-      return res.send(400).json({
+      return res.status(400).json({
         message:
           'please choose your native language(the language you wish to teach)',
       });
@@ -29,7 +29,7 @@ export const signup = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user) {
-      return res.status(400).json({ massage: 'Email already in use ' });
+      return res.status(400).json({ message: 'Email already in use ' });
     }
 
     const salt = await bcrypt.genSalt(10);
