@@ -123,3 +123,45 @@ export const delRequest = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+export const loadFriends = async (req, res) => {
+  try {
+    const myId = req.user._id;
+    if (!myId) {
+      return res.status(400).json({ message: 'myId missen' });
+    }
+
+    const freinds = await User.findById(myId);
+    if (!freinds) {
+      return res.status(400).json({ message: "can't fetch your info from db" });
+    }
+
+    res.status(200).json({
+      freinds: freinds.friends,
+    });
+  } catch (error) {
+    console.error('Error in fetching friends:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+export const loadFriendReq = async (req, res) => {
+  try {
+    const myId = req.user._id;
+    if (!myId) {
+      return res.status(400).json({ message: 'myId missen' });
+    }
+
+    const freinds = await User.findById(myId);
+    if (!freinds) {
+      return res.status(400).json({ message: "can't fetch your info from db" });
+    }
+
+    res.status(200).json({
+      freindReq: freinds.friendReq,
+    });
+  } catch (error) {
+    console.error('Error in fetching friend Requests:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
