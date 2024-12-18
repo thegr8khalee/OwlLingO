@@ -21,6 +21,14 @@ export const signup = async (req, res) => {
           'please choose your native language(the language you wish to teach)',
       });
     }
+
+    if (!langToLearn) {
+      return res.status(400).json({
+        message:
+          'please choose your langToLearn',
+      });
+    }
+
     if (password.length < 6) {
       return res
         .status(400)
