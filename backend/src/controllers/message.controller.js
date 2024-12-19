@@ -4,11 +4,18 @@ import cloudinary from '../lib/cloudinary.js';
 
 export const getUserFromSidebar = async (req, res) => {
   try {
-    const loggedInUserId = req.user._id;
-    const filteredUsers = await User.find({
-      _id: { $ne: loggedInUserId },
-    }).select(-'password');
-    res.status(200).json(filteredUsers);
+    const myId = req.user._id;
+    const me = await User.findById(myId).select('-password');
+    if (!me) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    const friends = me.friends;
+
+    const friendDetails = await Promise.all(
+      friends.map((userId) => User.findById(userId).select('-password'))
+    );
+
+    res.status(200).json(friendDetails);
   } catch (error) {
     console.log('Error in getUsersFromSidebar controller: ', error.message);
     res.status(500).json({ message: 'Internal serever error' });

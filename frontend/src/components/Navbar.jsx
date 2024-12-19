@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
-import { LogOut, Palette, UserRoundPen, UserRoundSearch } from "lucide-react";
+import { Bell, LogOut, Palette, UserRoundPen, UserRoundSearch } from "lucide-react";
 import logo from './img/OwlLingO_logo.png'
 
 const Navbar = () => {
@@ -22,7 +22,7 @@ const Navbar = () => {
                 className="size-9 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors"
                 />
               </div>
-              <h1 className="text-lg font-bold">OwlLingO</h1>
+              <h1 className="text-lg font-bold animate-pulse">OwlLingO</h1>
             </Link>
           </div>
 
@@ -54,6 +54,17 @@ const Navbar = () => {
                 >
                 <UserRoundSearch className="w-4 h-4" />
                 <span className="hidden sm:inline">Search</span>
+                </Link>
+
+                <Link
+                to={"/notification"}
+                className={`
+                btn btn-sm gap-2 transition-colors
+              
+                `}
+                >
+                <Bell className="w-4 h-4" />
+                <span className="hidden sm:inline">Notification</span>
                 </Link>
 
                 <button className="flex gap-2 items-center" onClick={logout}>
