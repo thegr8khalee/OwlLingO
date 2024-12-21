@@ -8,13 +8,14 @@ export const searchUsers = async (req, res) => {
     const searchParams = {};
 
     if (fullName) searchParams.fullName = new RegExp(fullName, 'i');
-    if (nativeLang) searchParams.nativeLang = nativeLang;
-    if (langToLearn) searchParams.langToLearn = langToLearn;
+    if (nativeLang) searchParams.nativeLang = new RegExp(nativeLang, 'i' );
+    if (langToLearn) searchParams.langToLearn = new RegExp(langToLearn, 'i');
 
     const result = await User.find({
       ...searchParams,
       _id: { $ne: myId },
-    }).select(-'password');
+    }).select({ password: 0 });
+
 
     res.status(200).json(
       result.map((user) => ({
@@ -30,6 +31,26 @@ export const searchUsers = async (req, res) => {
   } catch (error) {
     console.error('Error in search:', error);
     res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+export const suggestUsers = async (req, res) => {
+  try {
+    const myId = req.user._id;
+    const me = await User.findById(myId);
+    if (!me) return res.status(400).json({ message: 'Cant find me in the db' });
+    const suggestedUsers = await User.find({ nativeLang: me.langToLearn, langToLearn: me.nativeLang });
+    if (!suggestedUsers)
+      return res.status(400).json({ message: 'Cant find suggetsed Users' });
+    
+    const filtered = suggestedUsers.filter((user) => {
+      return !user.friendReq.includes(myId) && !user.friends.includes(myId);
+    });
+
+    res.status(200).json(filtered);
+  } catch (error) {
+    console.log('Error in find suggested Users', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 

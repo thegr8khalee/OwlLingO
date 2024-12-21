@@ -1,30 +1,27 @@
 import { UserRoundPlus } from "lucide-react";
-import { useFriendStore } from "../store/useFriendStore";
-import { Loader } from "lucide-react";
+import { useFriendStore } from "../store/useFriendStore"
+import { useEffect } from "react";
 
 const Suggested = () => {
 
-  const {searchResult, sendRequest, isSearching} = useFriendStore()
+  const {suggest, suggested, sendRequest} = useFriendStore()
 
-  if (isSearching) {
-    return (
-      <div className="justify-items-center">
-        <Loader className="size-10 animate-spin" />
-      </div>
-    );
-  }
+  useEffect(() => {
+    suggest();
+  }, [suggest]);
 
-  if (searchResult.length == 0) {
+  console.log({suggested})
+
+  if(suggested.length == 0) {
     return (
-        <h3 className="text-center text-lg font-semibold">No Search Result</h3>
+      <h3 className="text-center text-lg font-semibold"> No Suggested Users</h3>
     )
   }
 
-  console.log({searchResult})
   return (
     <div className="overflow-y-auto w-full py-3">
-      <h3 className="text-center text-lg font-semibold">Search Result</h3>
-        {searchResult.map((user) => (
+      <h3 className="text-center text-lg font-semibold">Suggested Users</h3>
+        {suggested.map((user) => (
           <div
             key={null}
             onClick={null}

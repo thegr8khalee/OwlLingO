@@ -57,7 +57,7 @@ const Navbar = () => {
                 </Link>
 
                 <Link
-                to={"/notification"}
+                to={"/notifications"}
                 className={`
                 btn btn-sm gap-2 transition-colors
               
