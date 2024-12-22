@@ -46,32 +46,41 @@ export const useFriendStore = create((set) => ({
 
   loadFriends: async (data) => {
     try {
-        const res = await axiosInstance.get("/freinds/loadFriends", data);
-        if(!res) return toast.error("Cant load your friends")
-        set({myFreinds: res.data})
+      const res = await axiosInstance.get('/freinds/loadFriends', data);
+      if (!res) return toast.error('Cant load your friends');
+      set({ myFreinds: res.data });
     } catch (error) {
-        toast.error(error.response.data.message)
+      toast.error(error.response.data.message);
     }
   },
 
   loadFriendReq: async (data) => {
     try {
-        const res = await axiosInstance.get("/freinds/loadFriendReq", data);
-        if(!res) return toast.error("Cant load your friend requests");
-        set({myFreindReq: res.data})
+      const res = await axiosInstance.get('/freinds/loadFriendReq', data);
+      if (!res) return toast.error('Cant load your friend requests');
+      set({ myFreindReq: res.data });
     } catch (error) {
-        toast.error(error.response.data.message)
+      toast.error(error.response.data.message);
     }
   },
 
   acceptRequest: async (senderId) => {
     try {
-        const data = { senderId };
-        const res = await axiosInstance.put("/freinds/acceptRequest", data);
-        if(!res) return toast.error("Cant accept requests");
+      const data = { senderId };
+      const res = await axiosInstance.put('/freinds/acceptRequest', data);
+      if (res) return toast.success('Freind Requested accepted successfully');
     } catch (error) {
-        toast.error(error.response.data.message)
+      toast.error(error.response.data.message);
     }
-  }
+  },
 
+  delRequest: async (senderId) => {
+    try {
+      const data = { senderId };
+      const res = await axiosInstance.put('/freinds/delRequest', data);
+      if (res) return toast.success('Friend Request deleted successfully');
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  },
 }));

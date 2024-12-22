@@ -34,15 +34,13 @@ const Navbar = () => {
               
               `}
             >
-              <Palette className="w-4 h-4" />
-              <span className="hidden sm:inline">Themes</span>
+              <Palette className="size-5" />
             </Link>
 
             {authUser && (
               <>
                 <Link to={"/profile"} className={`btn btn-sm gap-2`}>
                   <UserRoundPen className="size-5" />
-                  <span className="hidden sm:inline">Profile</span>
                 </Link>
 
                 <Link
@@ -52,8 +50,7 @@ const Navbar = () => {
               
                 `}
                 >
-                <UserRoundSearch className="w-4 h-4" />
-                <span className="hidden sm:inline">Search</span>
+                <UserRoundSearch className="size-5" />
                 </Link>
 
                 <Link
@@ -63,13 +60,13 @@ const Navbar = () => {
               
                 `}
                 >
-                <Bell className="w-4 h-4" />
-                <span className="hidden sm:inline">Notification</span>
+                <Bell className="size-5" />
+                {/* <span className="hidden sm:inline"></span> */}
                 </Link>
 
                 <button className="flex gap-2 items-center" onClick={logout}>
                   <LogOut className="size-5" />
-                  <span className="hidden sm:inline">Logout</span>
+                  {/* <span className="hidden sm:inline"></span> */}
                 </button>
               </>
             )}
