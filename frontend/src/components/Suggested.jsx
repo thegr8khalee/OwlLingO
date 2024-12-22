@@ -23,8 +23,8 @@ const Suggested = () => {
       <h3 className="text-center text-lg font-semibold">Suggested Users</h3>
         {suggested.map((user) => (
           <div
-            key={null}
-            onClick={null}
+            key=""
+            onClick=""
             className={`
               w-full p-3 flex items-center gap-3
               hover:bg-base-300 transition-colors
