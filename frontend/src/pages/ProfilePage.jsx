@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Camera, Mail, User, Languages, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 const ProfilePage = () => {
-  const { authUser, isUpdatingProfile, updateProfile } = useAuthStore();
+  const { authUser, isUpdatingProfile, updateProfile, checkAuth } = useAuthStore();
   const [selectedImg, setSelectedImg] = useState(null);
+
+  useEffect(() => {
+      checkAuth();
+    }, [checkAuth]);
+  
 
   const [formData, setFormData] = useState({
     nativeLang: "",

@@ -8,14 +8,13 @@ export const searchUsers = async (req, res) => {
     const searchParams = {};
 
     if (fullName) searchParams.fullName = new RegExp(fullName, 'i');
-    if (nativeLang) searchParams.nativeLang = new RegExp(nativeLang, 'i' );
+    if (nativeLang) searchParams.nativeLang = new RegExp(nativeLang, 'i');
     if (langToLearn) searchParams.langToLearn = new RegExp(langToLearn, 'i');
 
     const result = await User.find({
       ...searchParams,
       _id: { $ne: myId },
     }).select({ password: 0 });
-
 
     res.status(200).json(
       result.map((user) => ({
@@ -39,10 +38,13 @@ export const suggestUsers = async (req, res) => {
     const myId = req.user._id;
     const me = await User.findById(myId);
     if (!me) return res.status(400).json({ message: 'Cant find me in the db' });
-    const suggestedUsers = await User.find({ nativeLang: me.langToLearn, langToLearn: me.nativeLang });
+    const suggestedUsers = await User.find({
+      nativeLang: me.langToLearn,
+      langToLearn: me.nativeLang,
+    });
     if (!suggestedUsers)
       return res.status(400).json({ message: 'Cant find suggetsed Users' });
-    
+
     const filtered = suggestedUsers.filter((user) => {
       return !user.friendReq.includes(myId) && !user.friends.includes(myId);
     });
@@ -170,19 +172,36 @@ export const loadFriendReq = async (req, res) => {
   try {
     const myId = req.user._id;
     if (!myId) {
-      return res.status(400).json({ message: 'myId missen' });
+      return res.status(400).json({ message: 'myId is missing' });
     }
 
-    const freinds = await User.findById(myId);
-    if (!freinds) {
-      return res.status(400).json({ message: "can't fetch your info from db" });
+    const user = await User.findById(myId);
+    if (!user) {
+      return res
+        .status(400)
+        .json({ message: "Can't fetch your info from the database" });
     }
 
-    res.status(200).json({
-      freindReq: freinds.friendReq,
-    });
+    const friendReqIds = user.friendReq;
+
+    // Fetch each friend request from the database
+    const friendRequests = await Promise.all(
+      friendReqIds.map(async (id) => {
+        const friend = await User.findById(id).select('-password'); // Exclude sensitive fields like password
+        return {
+          _id: friend._id,
+          fullName: friend.fullName,
+          email: friend.email,
+          profilePic: friend.profilePic,
+          nativeLang: friend.nativeLang,
+          langToLearn: friend.langToLearn,
+        };
+      })
+    );
+
+    res.status(200).json(friendRequests);
   } catch (error) {
-    console.error('Error in fetching friend Requests:', error);
+    console.error('Error in fetching friend requests:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 };

@@ -7,6 +7,8 @@ export const useFriendStore = create((set) => ({
   searchResult: [],
   suggested: [],
   isSuggesting: false,
+  myFreinds: [],
+  myFreindReq: [],
 
   search: async (data) => {
     set({ isSearching: true });
@@ -41,4 +43,35 @@ export const useFriendStore = create((set) => ({
       toast.error(error.response.data.message);
     }
   },
+
+  loadFriends: async (data) => {
+    try {
+        const res = await axiosInstance.get("/freinds/loadFriends", data);
+        if(!res) return toast.error("Cant load your friends")
+        set({myFreinds: res.data})
+    } catch (error) {
+        toast.error(error.response.data.message)
+    }
+  },
+
+  loadFriendReq: async (data) => {
+    try {
+        const res = await axiosInstance.get("/freinds/loadFriendReq", data);
+        if(!res) return toast.error("Cant load your friend requests");
+        set({myFreindReq: res.data})
+    } catch (error) {
+        toast.error(error.response.data.message)
+    }
+  },
+
+  acceptRequest: async (senderId) => {
+    try {
+        const data = { senderId };
+        const res = await axiosInstance.put("/freinds/acceptRequest", data);
+        if(!res) return toast.error("Cant accept requests");
+    } catch (error) {
+        toast.error(error.response.data.message)
+    }
+  }
+
 }));

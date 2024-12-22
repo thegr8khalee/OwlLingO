@@ -1,10 +1,31 @@
-import { UserRoundPlus } from "lucide-react";
+import { MessageSquare, UserRoundPlus } from "lucide-react";
 import { useFriendStore } from "../store/useFriendStore";
 import { Loader } from "lucide-react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useChatStore } from "../store/useChatStore";
+
+
 
 const Suggested = () => {
 
-  const {searchResult, sendRequest, isSearching} = useFriendStore()
+  const {searchResult, sendRequest, isSearching, myFreinds, loadFriends} = useFriendStore()
+  const {setSelectedUser} = useChatStore()
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    loadFriends();
+  }, [loadFriends]);
+
+  console.log({myFreinds})
+
+  const isFriend = (usr) => {
+    if (Array.isArray(myFreinds.freinds) && myFreinds.freinds.includes(usr)) {
+      return true;
+    }
+    return false;
+  };
 
   if (isSearching) {
     return (
@@ -47,11 +68,24 @@ const Suggested = () => {
                 Native Language: {user.nativeLang} Language to Learn: {user.langToLearn}
               </div>
             </div>
-            <button className="btn btn-primary ml-auto"
+            
+            {/* TODO */}
+            {isFriend(user._id) ? (
+            <button
+            className="btn btn-primary ml-auto"
+            onClick={() => {navigate("/"); setSelectedUser(user);}}
+            >
+            <MessageSquare />
+            </button>
+            ) : (
+            <button
+            className="btn btn-primary ml-auto"
             onClick={() => sendRequest(user._id)}
             >
-              <UserRoundPlus/>
+            <UserRoundPlus />
             </button>
+            )}
+
           </div>
         ))}
       </div>
