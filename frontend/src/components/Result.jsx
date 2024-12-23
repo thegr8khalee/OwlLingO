@@ -1,16 +1,20 @@
-import { MessageSquare, UserRoundPlus } from "lucide-react";
+import { CircleMinus, Handshake, MessageSquare, UserRoundPlus } from "lucide-react";
 import { useFriendStore } from "../store/useFriendStore";
 import { Loader } from "lucide-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useChatStore } from "../store/useChatStore";
+import { useAuthStore } from "../store/useAuthStore";
 
 
 
 const Suggested = () => {
 
-  const {searchResult, sendRequest, isSearching, myFreinds, loadFriends} = useFriendStore()
+  const {searchResult, sendRequest, isSearching, myFreinds, loadFriends, acceptRequest, cancelRequest} = useFriendStore()
   const {setSelectedUser} = useChatStore()
+
+  const {authUser} = useAuthStore()
+  console.log({authUser})
 
   const navigate = useNavigate()
 
@@ -19,6 +23,7 @@ const Suggested = () => {
   }, [loadFriends]);
 
   console.log({myFreinds})
+  console.log({searchResult})
 
   const isFriend = (usr) => {
     if (Array.isArray(myFreinds.freinds) && myFreinds.freinds.includes(usr)) {
@@ -26,6 +31,14 @@ const Suggested = () => {
     }
     return false;
   };
+
+  const userSentReq = (usr) => {
+    return authUser.friendReq.includes(usr._id);
+  }
+
+  const iSentReq = (usr) => {
+    return usr.friendReq.includes(authUser._id);
+  }
 
   if (isSearching) {
     return (
@@ -73,9 +86,26 @@ const Suggested = () => {
             {isFriend(user._id) ? (
             <button
             className="btn btn-primary ml-auto"
-            onClick={() => {navigate("/"); setSelectedUser(user);}}
+            onClick={() => {
+            navigate("/");
+            setSelectedUser(user);
+            }}
             >
             <MessageSquare />
+            </button>
+            ) : iSentReq(user) ? (
+            <button
+            className="btn btn-primary ml-auto"
+            onClick={() => cancelRequest(user._id)}
+            >
+            <CircleMinus/>
+            </button>
+            ) : userSentReq(user) ? (
+            <button
+            className="btn btn-primary ml-auto"
+            onClick={() => acceptRequest(user._id)}
+            >
+            <Handshake/>
             </button>
             ) : (
             <button

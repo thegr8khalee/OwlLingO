@@ -83,4 +83,14 @@ export const useFriendStore = create((set) => ({
       toast.error(error.response.data.message);
     }
   },
+
+  cancelRequest: async (senderId) => {
+    try {
+      const data = { senderId };
+      const res = await axiosInstance.put('/freinds/cancelRequest', data);
+      if (res) return toast.success('Friend Request cancelled successfully');
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  },
 }));

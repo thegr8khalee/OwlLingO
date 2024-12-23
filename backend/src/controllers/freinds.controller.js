@@ -25,6 +25,7 @@ export const searchUsers = async (req, res) => {
         nativeLang: user.nativeLang,
         langToLearn: user.langToLearn,
         createdAt: user.createdAt,
+        friendReq: user.friendReq,
       }))
     );
   } catch (error) {
@@ -143,6 +144,36 @@ export const delRequest = async (req, res) => {
       .json({ message: 'Friend request deleted successfully.', user });
   } catch (error) {
     console.error('Error in deleting request:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+export const cancelRequest = async (req, res) => {
+  try {
+    const myId = req.user._id;
+    const { senderId } = req.body;
+
+    if (!senderId) {
+      return res.status(400).json({ message: 'Sender ID is required.' });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      senderId,
+      {
+        $pull: { friendReq: myId },
+      },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    res
+      .status(200)
+      .json({ message: 'Friend request cancelled successfully.', user });
+  } catch (error) {
+    console.error('Error in cancelling request:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 };
