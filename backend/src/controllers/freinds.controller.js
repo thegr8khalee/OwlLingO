@@ -47,7 +47,7 @@ export const suggestUsers = async (req, res) => {
       return res.status(400).json({ message: 'Cant find suggetsed Users' });
 
     const filtered = suggestedUsers.filter((user) => {
-      return !user.friendReq.includes(myId) && !user.friends.includes(myId);
+      return !user.friendReq.includes(myId) && !user.friends.includes(myId) && !me.friendReq.includes(user._id);
     });
 
     res.status(200).json(filtered);

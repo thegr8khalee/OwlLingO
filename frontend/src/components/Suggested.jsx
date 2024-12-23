@@ -1,6 +1,6 @@
-import { UserRoundPlus } from "lucide-react";
 import { useFriendStore } from "../store/useFriendStore"
 import { useEffect } from "react";
+import { SendRequestButton } from "./Buttons";
 
 const Suggested = () => {
 
@@ -44,11 +44,7 @@ const Suggested = () => {
                 Native Language: {user.nativeLang} Language to Learn: {user.langToLearn}
               </div>
             </div>
-            <button className="btn btn-primary ml-auto"
-            onClick={() => sendRequest(user._id)}
-            >
-              <UserRoundPlus/>
-            </button>
+            <SendRequestButton userId={user._id} sendRequest={sendRequest} />
           </div>
         ))}
       </div>

@@ -1,10 +1,12 @@
-import { CircleMinus, Handshake, MessageSquare, UserRoundPlus } from "lucide-react";
+/* eslint-disable react/prop-types */
+import { MessageSquare } from "lucide-react";
 import { useFriendStore } from "../store/useFriendStore";
 import { Loader } from "lucide-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
+import {CancelRequestButton, AcceptRequestButton, SendRequestButton} from "./Buttons"
 
 
 
@@ -40,6 +42,7 @@ const Suggested = () => {
     return usr.friendReq.includes(authUser._id);
   }
 
+
   if (isSearching) {
     return (
       <div className="justify-items-center">
@@ -55,6 +58,7 @@ const Suggested = () => {
   }
 
   console.log({searchResult})
+
   return (
     <div className="overflow-y-auto w-full py-3">
       <h3 className="text-center text-lg font-semibold">Search Result</h3>
@@ -94,26 +98,11 @@ const Suggested = () => {
             <MessageSquare />
             </button>
             ) : iSentReq(user) ? (
-            <button
-            className="btn btn-primary ml-auto"
-            onClick={() => cancelRequest(user._id)}
-            >
-            <CircleMinus/>
-            </button>
+            <CancelRequestButton userId={user._id} cancelRequest={cancelRequest} />
             ) : userSentReq(user) ? (
-            <button
-            className="btn btn-primary ml-auto"
-            onClick={() => acceptRequest(user._id)}
-            >
-            <Handshake/>
-            </button>
+            <AcceptRequestButton userId={user._id} acceptRequest={acceptRequest} />
             ) : (
-            <button
-            className="btn btn-primary ml-auto"
-            onClick={() => sendRequest(user._id)}
-            >
-            <UserRoundPlus />
-            </button>
+            <SendRequestButton userId={user._id} sendRequest={sendRequest} />
             )}
 
           </div>

@@ -30,11 +30,12 @@ const Navbar = () => {
             <Link
               to={"/theme"}
               className={`
-              btn btn-sm gap-2 transition-colors
+              btn btn-sm gap-2 transition-colors relative group
               
               `}
             >
               <Palette className="size-5" />
+              {/* <span className="hidden group-hover:opacity-100 group-hover:translate-x-2 group-hover:flex">Themes</span> */}
             </Link>
 
             {authUser && (

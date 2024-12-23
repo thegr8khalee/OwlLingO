@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useFriendStore } from "../store/useFriendStore"
-import { Handshake, Trash2 } from "lucide-react";
+import { UserRequestButtons } from "./Buttons";
 
 const Notification = () => {
 
@@ -44,16 +44,11 @@ const Notification = () => {
                 Native Language: {user.nativeLang} Language to Learn: {user.langToLearn}
               </div>
             </div>
-            <button className="btn btn-primary ml-auto"
-            onClick={() => delRequest(user._id)}
-            >
-              <Trash2/>
-            </button>
-            <button className="btn btn-primary ml-auto"
-            onClick={() => acceptRequest(user._id)}
-            >
-              <Handshake/>
-            </button>
+            <UserRequestButtons
+            user={user}
+            delRequest={delRequest}
+            acceptRequest={acceptRequest}
+            />
           </div>
         ))}
       </div>

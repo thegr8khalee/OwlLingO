@@ -6,7 +6,7 @@ import { useFriendStore } from "../store/useFriendStore";
 const Searchbar = () => {
 
   const {search, searchResult} = useFriendStore()
-  
+
   console.log({searchResult})
 
   const [formData, setFormData] = useState({
@@ -32,7 +32,8 @@ const Searchbar = () => {
 
   return (
     <div className="space-y-4">
-        <h3 className="text-center text-lg font-semibold">Search filters:</h3>
+        <h3 className="text-center text-lg font-semibold">Search filters</h3>
+        {/* <p className="text-center">Add at least one filter</p> */}
     <div className="flex items-center gap-4">
         <form onSubmit={handleSubmit} className="space-y-6">
         <input type="text" placeholder="Name" className="input input-bordered w-full max-w-full" 
