@@ -21,5 +21,6 @@ router.put('/delRequest', protectRoute, delRequest);
 router.put('/cancelRequest', protectRoute, cancelRequest);
 router.get('/loadFriends', protectRoute, loadFriends);
 router.get('/loadFriendReq', protectRoute, loadFriendReq);
+//router.get('/getMe', protectRoute, getMe);
 
 export default router;

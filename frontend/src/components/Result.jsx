@@ -12,7 +12,7 @@ import {CancelRequestButton, AcceptRequestButton, SendRequestButton} from "./But
 
 const Suggested = () => {
 
-  const {searchResult, sendRequest, isSearching, myFreinds, loadFriends, acceptRequest, cancelRequest} = useFriendStore()
+  const {searchResult, sendRequest, isSearching, myFreinds, loadFriends, acceptRequest, cancelRequest, myFreindReq } = useFriendStore()
   const {setSelectedUser} = useChatStore()
 
   const {authUser} = useAuthStore()
@@ -35,7 +35,7 @@ const Suggested = () => {
   };
 
   const userSentReq = (usr) => {
-    return authUser.friendReq.includes(usr._id);
+    return myFreindReq.includes(usr._id);
   }
 
   const iSentReq = (usr) => {
