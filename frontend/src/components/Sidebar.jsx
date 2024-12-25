@@ -31,7 +31,7 @@ const Sidebar = () => {
     <div className="flex items-center gap-2">
       <Users className="size-6" />
       {/* Conditionally hide Contacts text */}
-      {!selectedUser && <span className="font-medium hidden lg:block">Contacts</span>}
+      {!selectedUser && <span className="font-medium">Friends</span>}
     </div>
 
     {/* Online filter toggle - visible only if no user is selected */}
@@ -70,9 +70,14 @@ const Sidebar = () => {
           {onlineUsers.includes(user._id) && (
             <span
               className="absolute bottom-0 right-0 size-3 bg-green-500 
-              rounded-full ring-2 ring-zinc-900"
+              rounded-full ring-2 ring-green-500"
             />
           )}
+          {/** TODO */}
+          {/* <span
+              className="absolute top-0 left-0 size-3 bg-blue-500 
+              rounded-full ring-2 ring-blue-500"
+            /> */}
         </div>
 
         {/* User info - hide when a user is selected */}
