@@ -16,11 +16,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-full">
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
-              <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
+              <div className="size-9 rounded-lg flex items-center justify-center">
               <img
                 src={logo}
                 alt="logo"
-                className="size-9 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors"
+                className="size-9 rounded-xl bg-primary/9 group-hover:bg-primary/20 transition-colors"
                 />
               </div>
               <h1 className="text-lg font-bold animate-pulse">OwlLingO</h1>
@@ -36,34 +36,36 @@ const Navbar = () => {
               `}
             >
               <Palette className="size-5" />
-              {/* <span className="hidden group-hover:opacity-100 group-hover:translate-x-2 group-hover:flex">Themes</span> */}
+              <span className="hidden group-hover:flex duration-300">Themes</span>
             </Link>
 
             {authUser && (
               <>
-                <Link to={"/profile"} className={`btn btn-sm gap-2`}>
+                <Link to={"/profile"} className={`btn btn-sm gap-2 group`}>
+          
                   <UserRoundPen className="size-5" />
+                  <span className="hidden group-hover:flex duration-300">Profile</span>
                 </Link>
 
                 <Link
                 to={"/search"}
                 className={`
-                btn btn-sm gap-2 transition-colors
-              
-                `}
+                btn btn-sm gap-2 transition-colors group`}
                 >
                 <UserRoundSearch className="size-5" />
+                <span className="hidden group-hover:flex duration-300">Search</span>
                 </Link>
 
                 <Link
                 to={"/notifications"}
                 className={`
-                btn btn-sm gap-2 transition-colors
+                btn btn-sm gap-2 transition-colors group
               
                 `}
                 >
+                
                 <Bell className="size-5" />
-                {/* <span className="hidden sm:inline"></span> */}
+                <span className="hidden group-hover:flex duration-300">Notifications</span>
                 </Link>
 
                 {/** video link */}
@@ -71,16 +73,17 @@ const Navbar = () => {
                 href="https://meet.google.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-sm gap-2 transition-colors"
+                className="btn btn-sm gap-2 transition-colors group"
                 >
-                <img src={meet} alt="meet" className="size-5" />
-                {/* <span className="hidden sm:inline"></span> */}
+                
+                <img src={meet} alt="meet" className="size-5 ml-0" />
+                <span className="hidden group-hover:flex duration-300">Google Meet</span>
                 </a>
 
 
-                <button className="flex gap-2 items-center" onClick={logout}>
+                <button className="flex gap-2 items-center group" onClick={logout}>
                   <LogOut className="size-5" />
-                  {/* <span className="hidden sm:inline"></span> */}
+                  {/* <span className="hidden group-hover:flex duration-300">Log Out</span> */}
                 </button>
               </>
             )}

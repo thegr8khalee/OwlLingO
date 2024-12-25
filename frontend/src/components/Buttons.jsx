@@ -12,11 +12,12 @@ export const CancelRequestButton = ({ userId, cancelRequest }) => {
   
     return (
       <button
-        className="btn btn-primary ml-auto"
+        className="btn btn-primary ml-auto group"
         onClick={handleCancelClick}
         disabled={isClicked} // Disable the button if clicked
       >
         {isClicked ? <Check /> : <CircleMinus />}
+        <span className="hidden group-hover:flex duration-300">Cancel Request</span>
       </button>
     );
   };
@@ -31,11 +32,12 @@ export const CancelRequestButton = ({ userId, cancelRequest }) => {
   
     return (
       <button
-        className="btn btn-primary ml-auto"
+        className="btn btn-primary ml-auto group"
         onClick={handleAcceptClick}
         disabled={isClicked} // Disable the button if clicked
       >
         {isClicked ? <ChevronRight /> : <Handshake />}
+        <span className="hidden group-hover:flex duration-300">Accept Friend</span>
       </button>
     );
   };
@@ -50,11 +52,12 @@ export const CancelRequestButton = ({ userId, cancelRequest }) => {
   
     return (
       <button
-        className="btn btn-primary ml-auto"
+        className="btn btn-primary ml-auto group"
         onClick={handleSendClick}
         disabled={isClicked} // Disable the button if clicked
       >
         {isClicked ? <ChevronRight /> : <UserRoundPlus />}
+        <span className="hidden group-hover:flex duration-300">Send Request</span>
       </button>
     );
   };
@@ -82,16 +85,18 @@ export const CancelRequestButton = ({ userId, cancelRequest }) => {
         ) : (
           <>
             <button
-              className="btn btn-primary ml-auto"
+              className="btn btn-primary ml-auto group"
               onClick={() => handleDeleteRequest(user._id)}
             >
               <Trash2 />
+              <span className="hidden group-hover:flex duration-300">Delete</span>
             </button>
             <button
-              className="btn btn-primary ml-auto"
+              className="btn btn-primary ml-auto group"
               onClick={() => handleAcceptRequest(user._id)}
             >
               <Handshake />
+              <span className="hidden group-hover:flex duration-300">Accept</span>
             </button>
           </>
         )}

@@ -19,19 +19,40 @@ export function getReceiverSocketId(userId) {
 const userSocketMap = {};
 
 io.on('connection', (socket) => {
-    console.log("A user is connected: ", socket.id);
+  console.log('A user is connected: ', socket.id);
 
-    const userId = socket.handshake.query.userId
-    if(userId) userSocketMap[userId] = socket.id
+  // Map the user ID to the socket ID
+  const userId = socket.handshake.query.userId;
+  if (userId) userSocketMap[userId] = socket.id;
 
-    // send to all connected users
-    io.emit('getOnlineUsers', Object.keys(userSocketMap))
+  // Notify all users about the online users
+  io.emit('getOnlineUsers', Object.keys(userSocketMap));
 
-    socket.on("disconnect", () => {
-        console.log("A user disconnected: ", socket.id)
-        delete userSocketMap[userId]
-        io.emit('getOnlineUsers', Object.keys(userSocketMap))
-    })
-})
+  // Emit the socket ID to the connected user
+  socket.emit('me', socket.id);
+
+  // Handle video call-related events
+  socket.on('calluser', ({ userToCall, signalData, from, name }) => {
+    io.to(userToCall).emit('calluser', { signal: signalData, from, name });
+  });
+
+  socket.on('answercall', (data) => {
+    io.to(data.to).emit('callaccepted', data.signal);
+  });
+
+  // Handle disconnection
+  socket.on('disconnect', () => {
+    console.log('A user disconnected: ', socket.id);
+
+    // Remove the user from the user-socket map
+    if (userId) delete userSocketMap[userId];
+
+    // Notify all users about the updated online users
+    io.emit('getOnlineUsers', Object.keys(userSocketMap));
+
+    // Broadcast that the call has ended
+    socket.broadcast.emit('callended');
+  });
+});
 
 export { io, app, server };

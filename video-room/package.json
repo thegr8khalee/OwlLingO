@@ -1,0 +1,32 @@
+{
+  "name": "react-video-chat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
+    "@mui/icons-material": "^6.1.10",
+    "@mui/material": "^6.1.10",
+    "@mui/styled-engine-sc": "^6.1.10",
+    "cors": "^2.8.5",
+    "daisyui": "^4.12.22",
+    "express": "^4.21.1",
+    "lucide-react": "^0.469.0",
+    "nodemon": "^3.1.7",
+    "react-copy-to-clipboard": "^5.1.0",
+    "simple-peer": "^9.11.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "styled-components": "^6.1.13"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
