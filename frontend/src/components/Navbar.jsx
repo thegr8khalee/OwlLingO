@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
 import { Bell, LogOut, Palette, UserRoundPen, UserRoundSearch } from "lucide-react";
 import logo from './img/OwlLingO_logo.png'
+import meet from './img/meet.png'
 
 const Navbar = () => {
   const { logout, authUser } = useAuthStore();
@@ -64,6 +65,18 @@ const Navbar = () => {
                 <Bell className="size-5" />
                 {/* <span className="hidden sm:inline"></span> */}
                 </Link>
+
+                {/** video link */}
+                <a
+                href="https://meet.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-sm gap-2 transition-colors"
+                >
+                <img src={meet} alt="meet" className="size-5" />
+                {/* <span className="hidden sm:inline"></span> */}
+                </a>
+
 
                 <button className="flex gap-2 items-center" onClick={logout}>
                   <LogOut className="size-5" />

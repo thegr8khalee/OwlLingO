@@ -36,7 +36,7 @@ const Sidebar = () => {
 
     {/* Online filter toggle - visible only if no user is selected */}
     {!selectedUser && (
-      <div className="mt-3 hidden lg:flex items-center gap-2">
+      <div className="mt-3 flex items-center gap-2">
         <label className="cursor-pointer flex items-center gap-2">
           <input
             type="checkbox"
@@ -44,9 +44,9 @@ const Sidebar = () => {
             onChange={(e) => setShowOnlineOnly(e.target.checked)}
             className="checkbox checkbox-sm"
           />
-          <span className="text-sm">Show online only</span>
+          <span className="text-sm">Online Only</span>
         </label>
-        <span className="text-xs text-zinc-500">({onlineUsers.length - 1} online)</span>
+        {/* <span className="text-xs text-zinc-500">({onlineUsers.length - 1} online)</span> */}
       </div>
     )}
   </div>
@@ -61,7 +61,7 @@ const Sidebar = () => {
         }`}
       >
         {/* Profile picture */}
-        <div className="relative mx-auto lg:mx-0">
+        <div className="relative mx-0">
           <img
             src={user.profilePic || "/avatar.png"}
             alt={user.name}
