@@ -13,16 +13,41 @@ export const getUserFromSidebar = async (req, res) => {
     }
     const friends = me.friends;
 
-    const friendDetails = await Promise.all(
-      friends.map((userId) => User.findById(userId).select('-password'))
+    // Fetch the latest message for each friend
+    const friendDetailsWithMessages = await Promise.all(
+      friends.map(async (friendId) => {
+        const latestMessage = await Message.findOne({
+          $or: [
+            { senderId: myId, receiverId: friendId },
+            { senderId: friendId, receiverId: myId },
+          ],
+        })
+          .sort({ createdAt: -1 }) // Sort by newest message
+          .select('createdAt'); // Only fetch the timestamp
+
+        const friendData = await User.findById(friendId).select('-password');
+        return {
+          friend: friendData,
+          lastMessage: latestMessage?.createdAt || null, // If no message exists, set null
+        };
+      })
     );
 
-    res.status(200).json(friendDetails);
+    // Sort friends by the timestamp of the latest message (descending order)
+    const sortedFriends = friendDetailsWithMessages.sort((a, b) => {
+      return new Date(b.lastMessage || 0) - new Date(a.lastMessage || 0);
+    });
+
+    // Map to only include friend details
+    const sortedFriendDetails = sortedFriends.map((item) => item.friend);
+
+    res.status(200).json(sortedFriendDetails);
   } catch (error) {
     console.log('Error in getUsersFromSidebar controller: ', error.message);
-    res.status(500).json({ message: 'Internal serever error' });
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
+
 
 export const getMessages = async (req, res) => {
   try {
