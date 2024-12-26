@@ -73,6 +73,12 @@ const Sidebar = () => {
               rounded-full ring-2 ring-zinc-900"
             />
           )}
+          {/* {user.lastMessage.read == false && (
+            <span
+              className="absolute top-0 left-0 size-3 bg-blue-500 
+              rounded-full ring-2 ring-zinc-900"
+            />
+          )} */}
         </div>
 
         {/* User info - hide when a user is selected */}
