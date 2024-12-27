@@ -5,8 +5,8 @@ import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 import { Users } from "lucide-react";
 
 const Sidebar = () => {
-  const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
-
+  const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading, markLastMessageAsRead } = useChatStore();
+  console.log({users})
 
   const { onlineUsers } = useAuthStore();
   const [showOnlineOnly, setShowOnlineOnly] =  useState(false);
@@ -54,38 +54,38 @@ const Sidebar = () => {
   <div className="overflow-y-auto w-full py-3">
     {filteredUsers.map((user) => (
       <button
-        key={user._id}
-        onClick={() => setSelectedUser(user)}
+        key={user.friend._id}
+        onClick={() => {setSelectedUser(user.friend); markLastMessageAsRead(user.friend._id)}}
         className={`w-full p-3 flex items-center gap-3 hover:bg-base-300 transition-colors ${
-          selectedUser?._id === user._id ? "bg-base-300 ring-1 ring-base-300" : ""
+          selectedUser?._id === user.friend._id ? "bg-base-300 ring-1 ring-base-300" : ""
         }`}
       >
         {/* Profile picture */}
         <div className="relative mx-0">
           <img
-            src={user.profilePic || "/avatar.png"}
-            alt={user.name}
+            src={user.friend.profilePic || "/avatar.png"}
+            alt={user.friend.name}
             className="size-12 object-cover rounded-full"
           />
-          {onlineUsers.includes(user._id) && (
+          {onlineUsers.includes(user.friend._id) && (
             <span
               className="absolute bottom-0 right-0 size-3 bg-green-500 
               rounded-full ring-2 ring-green-500"
             />
           )}
           {/** TODO */}
-          {/* <span
+          {user.readMessage?.read == false && (<span
               className="absolute top-0 left-0 size-3 bg-blue-500 
               rounded-full ring-2 ring-blue-500"
-            /> */}
+            />)}
         </div>
 
         {/* User info - hide when a user is selected */}
         {!selectedUser && (
           <div className="block text-left min-w-0">
-            <div className="font-medium truncate">{user.fullName}</div>
+            <div className="font-medium truncate">{user.friend.fullName}</div>
             <div className="text-sm text-zinc-400">
-              {onlineUsers.includes(user._id) ? "Online" : "Offline"}
+              {onlineUsers.includes(user.friend._id) ? "Online" : "Offline"}
             </div>
           </div>
         )}

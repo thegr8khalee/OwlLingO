@@ -53,7 +53,7 @@ export const useChatStore = create((set, get) => ({
 
     const socket = useAuthStore.getState().socket;
 
-    socket.on("newMessage", (newMessage) => {
+    socket.on('newMessage', (newMessage) => {
       const isMessageSentFromSelectedUser =
         newMessage.senderId === selectedUser._id;
       if (!isMessageSentFromSelectedUser) return;
@@ -69,5 +69,13 @@ export const useChatStore = create((set, get) => ({
     socket.off('newMessage');
   },
 
-   setSelectedUser: (selectedUser) => set({ selectedUser }),
+  setSelectedUser: (selectedUser) => set({ selectedUser }),
+
+  markLastMessageAsRead: async (id) => {
+    try {
+      await axiosInstance.put(`/message/mark-read/${id}`)
+    } catch (error) {
+      toast.error.apply(error.response.data.message)
+    }
+  }
 }));
