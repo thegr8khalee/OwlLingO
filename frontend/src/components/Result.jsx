@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
 import {CancelRequestButton, AcceptRequestButton, SendRequestButton} from "./Buttons"
-
+import { useTranslation } from "react-i18next";
 
 
 const Suggested = () => {
-
+  const { t } = useTranslation();
   const {searchResult, sendRequest, isSearching, myFreinds, loadFriends, acceptRequest, cancelRequest, myFreindReq } = useFriendStore()
   const {setSelectedUser} = useChatStore()
 
@@ -53,7 +53,7 @@ const Suggested = () => {
 
   if (searchResult.length == 0) {
     return (
-        <h3 className="text-center text-lg font-semibold">No Search Result</h3>
+        <h3 className="text-center text-lg font-semibold">{t("no_search_result")}</h3>
     )
   }
 
@@ -61,7 +61,7 @@ const Suggested = () => {
 
   return (
     <div className="overflow-y-auto w-full py-3">
-      <h3 className="text-center text-lg font-semibold">Search Result</h3>
+      <h3 className="text-center text-lg font-semibold">{t("search_result")}</h3>
         {searchResult.map((user) => (
           <div
             key={null}
@@ -82,7 +82,7 @@ const Suggested = () => {
             <div className="block text-left min-w-0">
               <div className="font-medium truncate">{user.fullName}</div>
               <div className="text-sm text-zinc-400">
-                Native Language: {user.nativeLang} Language to Learn: {user.langToLearn}
+              {t("nativeLanguage")}: {user.nativeLang} {t("languageToLearn")}: {user.langToLearn}
               </div>
             </div>
             

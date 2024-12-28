@@ -3,8 +3,10 @@ import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
 import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 import { Users } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Sidebar = () => {
+  const { t } = useTranslation();
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading, markLastMessageAsRead } = useChatStore();
   console.log({users})
 
@@ -31,7 +33,7 @@ const Sidebar = () => {
     <div className="flex items-center gap-2">
       <Users className="size-6" />
       {/* Conditionally hide Contacts text */}
-      {!selectedUser && <span className="font-medium">Friends</span>}
+      {!selectedUser && <span className="font-medium">{t("friends")}</span>}
     </div>
 
     {/* Online filter toggle - visible only if no user is selected */}
@@ -44,7 +46,7 @@ const Sidebar = () => {
             onChange={(e) => setShowOnlineOnly(e.target.checked)}
             className="checkbox checkbox-sm"
           />
-          <span className="text-sm">Online Only</span>
+          <span className="text-sm">{t("online_only")}</span>
         </label>
         {/* <span className="text-xs text-zinc-500">({onlineUsers.length - 1} online)</span> */}
       </div>
@@ -93,7 +95,7 @@ const Sidebar = () => {
     ))}
 
     {filteredUsers.length === 0 && (
-      <div className="text-center text-zinc-500 py-4">No online users</div>
+      <div className="text-center text-zinc-500 py-4">{t("no_online_users")}</div>
     )}
   </div>
 </aside>

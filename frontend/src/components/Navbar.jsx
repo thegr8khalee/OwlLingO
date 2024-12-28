@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
-import { Bell, Globe, LogOut, Palette, UserRoundPen, UserRoundSearch } from "lucide-react";
+import { Bell, Globe, LogOut, Settings, UserRoundPen, UserRoundSearch } from "lucide-react";
 import logo from './img/OwlLingO_logo.png'
 import meet from './img/meet.png'
 import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
   const { logout, authUser } = useAuthStore();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);  // Switch language using the i18n instance
   };
@@ -40,8 +40,8 @@ const Navbar = () => {
               
               `}
             >
-              <Palette className="size-5" />
-              <span className="hidden group-hover:flex duration-300">Themes</span>
+              <Settings className="size-5" />
+              <span className="hidden group-hover:flex duration-300">{t('sett')}</span>
             </Link>
 
             {!authUser && (
@@ -51,10 +51,18 @@ const Navbar = () => {
               <span className="mr-2">
                 <Globe /> 
               </span>
-                Language
+              {t('language')}
               </option>
               <option value="en">English</option>
               <option value="fr">Français</option>
+              <option value="ar">العربية</option>
+              <option value="bn_BD">বাংলা</option>
+              <option value="es">Español</option>
+              <option value="hi_IN">हिन्दी</option>
+              <option value="pt">Português</option>
+              <option value="ru">Русский</option>
+              <option value="ur">اردو</option>
+              <option value="zh_CN">中文</option>
             </select>
             )}
 
@@ -63,7 +71,7 @@ const Navbar = () => {
                 <Link to={"/profile"} className={`btn btn-sm gap-2 group`}>
           
                   <UserRoundPen className="size-5" />
-                  <span className="hidden group-hover:flex duration-300">Profile</span>
+                  <span className="hidden group-hover:flex duration-300">{t('profile')}</span>
                 </Link>
 
                 <Link
@@ -72,7 +80,7 @@ const Navbar = () => {
                 btn btn-sm gap-2 transition-colors group`}
                 >
                 <UserRoundSearch className="size-5" />
-                <span className="hidden group-hover:flex duration-300">Search</span>
+                <span className="hidden group-hover:flex duration-300">{t('search')}</span>
                 </Link>
 
                 <Link
@@ -84,7 +92,7 @@ const Navbar = () => {
                 >
                 
                 <Bell className="size-5" />
-                <span className="hidden group-hover:flex duration-300">Notifications</span>
+                <span className="hidden group-hover:flex duration-300">{t('notifications')}</span>
                 </Link>
 
                 {/** video link */}
@@ -96,7 +104,7 @@ const Navbar = () => {
                 >
                 
                 <img src={meet} alt="meet" className="size-5 ml-0" />
-                <span className="hidden group-hover:flex duration-300">Google Meet</span>
+                <span className="hidden group-hover:flex duration-300">{t('googleMeet')}</span>
                 </a>
 
 

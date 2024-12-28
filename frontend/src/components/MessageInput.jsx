@@ -2,8 +2,10 @@ import { useRef, useState } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { Image, Send, X } from "lucide-react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const MessageInput = () => {
+  const { t } = useTranslation();
   const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
@@ -54,7 +56,7 @@ const MessageInput = () => {
           <div className="relative">
             <img
               src={imagePreview}
-              alt="Preview"
+              alt={t('preview')}
               className="w-20 h-20 object-cover rounded-lg border border-zinc-700"
             />
             <button
@@ -74,7 +76,7 @@ const MessageInput = () => {
           <input
             type="text"
             className="w-full h-12 input input-bordered rounded-lg input-sm sm:input-md mt-auto mb-auto"
-            placeholder="Type a message..."
+            placeholder={t('messagePlaceholder')}
             value={text}
             onChange={(e) => setText(e.target.value)}
           />

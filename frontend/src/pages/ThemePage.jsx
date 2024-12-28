@@ -1,6 +1,7 @@
 import { THEMES } from "../constants";
 import { useThemeStore } from "../store/useThemeStore";
-import { Send } from "lucide-react";
+import { Globe, Send } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const PREVIEW_MESSAGES = [
   { id: 1, content: "Hey! How's it going?", isSent: false },
@@ -8,14 +9,37 @@ const PREVIEW_MESSAGES = [
 ];
 
 const ThemePage = () => {
+  const { t, i18n } = useTranslation();
   const { theme, setTheme } = useThemeStore();
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);  // Switch language using the i18n instance
+  };
 
   return (
     <div className="h-screen container mx-auto px-4 pt-20 max-w-5xl">
       <div className="space-y-6">
         <div className="flex flex-col gap-1">
-          <h2 className="text-lg font-semibold">Theme</h2>
-          <p className="text-sm text-base-content/70">Choose a theme for your chat interface</p>
+        <select className="select select-bordered w-full max-w-xs ml-auto mr-auto"
+              onChange={(e) => changeLanguage(e.target.value)}>
+              <option disabled selected>
+              <span className="mr-2">
+                <Globe /> 
+              </span>
+              {t('language')}
+              </option>
+              <option value="en">English</option>
+              <option value="fr">Français</option>
+              <option value="ar">العربية</option>
+              <option value="bn_BD">বাংলা</option>
+              <option value="es">Español</option>
+              <option value="hi_IN">हिन्दी</option>
+              <option value="pt">Português</option>
+              <option value="ru">Русский</option>
+              <option value="ur">اردو</option>
+              <option value="zh_CN">中文</option>
+            </select>
+          <h2 className="text-lg font-semibold">{t("theme.title")}</h2>
+          <p className="text-sm text-base-content/70">{t("theme.description")}</p>
         </div>
 
         <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
@@ -44,7 +68,7 @@ const ThemePage = () => {
         </div>
 
         {/* Preview Section */}
-        <h3 className="text-lg font-semibold mb-3">Preview</h3>
+        <h3 className="text-lg font-semibold mb-3">{t("theme.previewTitle")}</h3>
         <div className="rounded-xl border border-base-300 overflow-hidden bg-base-100 shadow-lg">
           <div className="p-4 bg-base-200">
             <div className="max-w-lg mx-auto">
@@ -58,7 +82,7 @@ const ThemePage = () => {
                     </div>
                     <div>
                       <h3 className="font-medium text-sm">John Doe</h3>
-                      <p className="text-xs text-base-content/70">Online</p>
+                      <p className="text-xs text-base-content/70">{t("theme.onlineStatus")}</p>
                     </div>
                   </div>
                 </div>
@@ -96,7 +120,7 @@ const ThemePage = () => {
                     <input
                       type="text"
                       className="input input-bordered flex-1 text-sm h-10"
-                      placeholder="Type a message..."
+                      placeholder={t("theme.typeMessage")}
                       value="This is a preview"
                       readOnly
                     />

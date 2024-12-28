@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Camera, Mail, User, Languages, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const ProfilePage = () => {
+  const { t } = useTranslation();
   const { authUser, isUpdatingProfile, updateProfile, checkAuth } = useAuthStore();
   const [selectedImg, setSelectedImg] = useState(null);
 
@@ -52,8 +54,8 @@ const ProfilePage = () => {
       <div className="max-w-2xl mx-auto p-4 py-8">
         <div className="bg-base-300 rounded-xl p-6 space-y-8">
           <div className="text-center">
-            <h1 className="text-2xl font-semibold ">Profile</h1>
-            <p className="mt-2">Your profile information</p>
+            <h1 className="text-2xl font-semibold ">{t("profilee.title")}</h1>
+            <p className="mt-2">{t("profilee.subtitle")}</p>
           </div>
 
           {/* avatar upload section */}
@@ -87,7 +89,7 @@ const ProfilePage = () => {
               </label>
             </div>
             <p className="text-sm text-zinc-400">
-              {isUpdatingProfile ? "Uploading..." : "Click the camera icon to update your photo"}
+              {isUpdatingProfile ? t("profilee.uploading") : t("profilee.clickToUpdate")}
             </p>
           </div>
 
@@ -95,7 +97,7 @@ const ProfilePage = () => {
             <div className="space-y-1.5">
               <div className="text-sm text-zinc-400 flex items-center gap-2">
                 <User className="w-4 h-4" />
-                Full Name
+                {t("profilee.fullName")}
               </div>
               <p className="px-4 py-2.5 bg-base-200 rounded-lg border">{authUser?.fullName}</p>
             </div>
@@ -103,7 +105,7 @@ const ProfilePage = () => {
             <div className="space-y-1.5">
               <div className="text-sm text-zinc-400 flex items-center gap-2">
                 <Mail className="w-4 h-4" />
-                Email Address
+                {t("profilee.email")}
               </div>
               <p className="px-4 py-2.5 bg-base-200 rounded-lg border">{authUser?.email}</p>
             </div>
@@ -111,7 +113,7 @@ const ProfilePage = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-medium">Native Language</span>
+                <span className="label-text font-medium">{t("profilee.nativeLang")}</span>
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -129,7 +131,7 @@ const ProfilePage = () => {
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-medium">Language To Learn</span>
+                <span className="label-text font-medium">{t("profilee.langToLearn")}</span>
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -149,24 +151,24 @@ const ProfilePage = () => {
               {isUpdatingProfile ? (
                 <>
                   <Loader2 className="size-5 animate-spin" />
-                  Loading...
+                  {t("profilee.loading")}
                 </>
               ) : (
-                "Update Profile"
+                t("profilee.updateProfile")
               )}
             </button>
             </form>
 
           <div className="mt-6 bg-base-300 rounded-xl p-6">
-            <h2 className="text-lg font-medium  mb-4">Account Information</h2>
+            <h2 className="text-lg font-medium  mb-4">{t("profilee.accountInfo")}</h2>
             <div className="space-y-3 text-sm">
               <div className="flex items-center justify-between py-2 border-b border-zinc-700">
-                <span>Member Since</span>
+                <span>{t("profilee.memberSince")}</span>
                 <span>{authUser.createdAt?.split("T")[0]}</span>
               </div>
               <div className="flex items-center justify-between py-2">
-                <span>Account Status</span>
-                <span className="text-green-500">Active</span>
+                <span>{t("profilee.accountStatus")}</span>
+                <span className="text-green-500">{t("profilee.active")}</span>
               </div>
             </div>
           </div>

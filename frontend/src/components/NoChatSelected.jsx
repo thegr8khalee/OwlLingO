@@ -1,6 +1,10 @@
 import logo from '../components/img/OwlLingO_logo.png';
+import { useTranslation } from "react-i18next";
 
 const NoChatSelected = () => {
+  const { t } = useTranslation();
+
+  
   return (
     <div className="flex w-full flex-1 flex-col items-center justify-center p-16 bg-base-100/50">
       <div className="max-w-md text-center space-y-6">
@@ -21,9 +25,9 @@ const NoChatSelected = () => {
         </div>
 
         {/* Welcome Text */}
-        <h2 className="text-2xl font-bold animate-pulse">Welcome to OwlLingO!</h2>
+        <h2 className="text-2xl font-bold animate-pulse">{t('welcomeText')}</h2>
         <p className="text-base-content/60">
-          Select a conversation from the sidebar to start chatting
+        {t('selectConversation')}
         </p>
       </div>
     </div>
