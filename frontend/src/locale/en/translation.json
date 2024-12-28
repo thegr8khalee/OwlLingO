@@ -1,0 +1,27 @@
+{
+    "welcome": "Welcome to OwlLingo!",
+    "signin": "Sign in to your account",
+    "email": "Email",
+    "password": "Password",
+    "signinb": "Sign in",
+    "donthaveaccount": "Don't have an account?",
+    "create": "Create account",
+    "welcomeback": "Welcome back!",
+    "Signintocont": "Sign in to continue your conversations and catch up with your messages.",
+    "createAccount": "Create Account",
+  "getStarted": "Get started with your free account",
+  "fullName": "Full Name",
+  "nativeLanguage": "Native Language",
+  "languageToLearn": "Language To Learn",
+  "enterYourNativeLanguage": "Enter Your Native Language",
+  "enterLanguageToLearn": "Enter Language To Learn",
+  "emailPlaceholder": "you@example.com",
+  "passwordPlaceholder": "••••••••",
+  "createAccountButton": "Create Account",
+  "loading": "Loading...",
+  "alreadyHaveAccount": "Already have an account?",
+  "signIn": "Sign in",
+  "joinCommunity": "Join our community",
+  "connectWithFriends": "Connect with friends, share moments, and stay in touch with your loved ones."
+
+}

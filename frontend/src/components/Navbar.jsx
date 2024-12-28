@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
-import { Bell, LogOut, Palette, UserRoundPen, UserRoundSearch } from "lucide-react";
+import { Bell, Globe, LogOut, Palette, UserRoundPen, UserRoundSearch } from "lucide-react";
 import logo from './img/OwlLingO_logo.png'
 import meet from './img/meet.png'
+import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
   const { logout, authUser } = useAuthStore();
+  const { i18n } = useTranslation();
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);  // Switch language using the i18n instance
+  };
 
   return (
     <header
@@ -38,6 +43,20 @@ const Navbar = () => {
               <Palette className="size-5" />
               <span className="hidden group-hover:flex duration-300">Themes</span>
             </Link>
+
+            {!authUser && (
+              <select className="select select-bordered w-full max-w-xs"
+              onChange={(e) => changeLanguage(e.target.value)}>
+              <option disabled selected>
+              <span className="mr-2">
+                <Globe /> 
+              </span>
+                Language
+              </option>
+              <option value="en">English</option>
+              <option value="fr">Français</option>
+            </select>
+            )}
 
             {authUser && (
               <>
