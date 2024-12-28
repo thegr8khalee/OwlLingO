@@ -5,9 +5,10 @@ import { useFriendStore } from "../store/useFriendStore";
 
 const Searchbar = () => {
 
-  const {search, searchResult} = useFriendStore()
+  const {search, searchResult, currentPage, totalPages} = useFriendStore()
 
   console.log({searchResult})
+  console.log({totalPages})
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -24,10 +25,13 @@ const Searchbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (validateForm()) {
+      search(formData, 1); // Reset to page 1 for new searches
+    }
+  };
 
-    const success = validateForm();
-
-    if (success === true) search(formData);
+  const handlePageChange = (page) => {
+    search(formData, page); // Fetch the desired page
   };
 
   return (
@@ -48,6 +52,28 @@ const Searchbar = () => {
         <button type="submit" className="btn btn-primary w-full">
           <Search/>
         </button>
+         {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex justify-between items-center mt-4">
+          <button
+            className="btn btn-primary"
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span className="text-center">
+            Search Result {currentPage} of {totalPages}
+          </span>
+          <button
+            className="btn btn-primary"
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
         </form>
     </div>
     </div>

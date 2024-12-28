@@ -3,18 +3,31 @@ import User from '../models/user.model.js';
 export const searchUsers = async (req, res) => {
   try {
     const myId = req.user._id;
-    const { fullName, nativeLang, langToLearn } = req.body;
+    const {
+      fullName,
+      nativeLang,
+      langToLearn,
+      page = 1,
+      limit = 10,
+    } = req.body;
 
     const searchParams = {};
-
     if (fullName) searchParams.fullName = new RegExp(fullName, 'i');
     if (nativeLang) searchParams.nativeLang = new RegExp(nativeLang, 'i');
     if (langToLearn) searchParams.langToLearn = new RegExp(langToLearn, 'i');
 
+    const totalCount = await User.countDocuments({
+      ...searchParams,
+      _id: { $ne: myId },
+    });
+
     const result = await User.find({
       ...searchParams,
       _id: { $ne: myId },
-    }).select({ password: 0 });
+    })
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .select({ password: 0 });
 
     res.status(200).json(
       result.map((user) => ({
@@ -26,6 +39,10 @@ export const searchUsers = async (req, res) => {
         langToLearn: user.langToLearn,
         createdAt: user.createdAt,
         friendReq: user.friendReq,
+        currentPage: page,
+        totalPages: Math.ceil(totalCount / limit),
+        totalCount,
+        limit,
       }))
     );
   } catch (error) {
@@ -40,14 +57,20 @@ export const suggestUsers = async (req, res) => {
     const me = await User.findById(myId);
     if (!me) return res.status(400).json({ message: 'Cant find me in the db' });
     const suggestedUsers = await User.find({
-      nativeLang: me.langToLearn,
-      langToLearn: me.nativeLang,
-    });
+      $or: [
+        { nativeLang: me.langToLearn },
+        { langToLearn: me.nativeLang },
+      ],
+    }).limit(10);   
     if (!suggestedUsers)
       return res.status(400).json({ message: 'Cant find suggetsed Users' });
 
     const filtered = suggestedUsers.filter((user) => {
-      return !user.friendReq.includes(myId) && !user.friends.includes(myId) && !me.friendReq.includes(user._id);
+      return (
+        !user.friendReq.includes(myId) &&
+        !user.friends.includes(myId) &&
+        !me.friendReq.includes(user._id)
+      );
     });
 
     res.status(200).json(filtered);

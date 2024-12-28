@@ -9,14 +9,24 @@ export const useFriendStore = create((set) => ({
   isSuggesting: false,
   myFreinds: [],
   myFreindReq: [],
+  totalPages: [],
 
-  search: async (data) => {
+  search: async (data, page = 1, limit = 10) => {
     set({ isSearching: true });
     try {
-      const res = await axiosInstance.post('/freinds/search/', data);
-      set({ searchResult: res.data });
+      const res = await axiosInstance.post('/freinds/search', {
+        ...data,
+        page,
+        limit,
+      });
+      const paginationInfo = res.data[0];
+      set({
+        searchResult: res.data,
+        currentPage: paginationInfo.currentPage,
+        totalPages: paginationInfo.totalPages,
+      });
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || 'Failed to fetch data');
     } finally {
       set({ isSearching: false });
     }
