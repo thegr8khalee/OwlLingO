@@ -19,8 +19,11 @@ const Searchbar = () => {
   });
 
   const validateForm = () => {
-    if (!formData.fullName.trim() && !formData.nativeLang.trim() && !formData.langToLearn.trim()) return toast.error("Please select at least one filter")
-  return true;
+    if (!formData.fullName.trim() && !formData.nativeLang.trim() && !formData.langToLearn.trim()) {
+      toast.error("Please select at least one filter")
+      return false
+    }
+    return true;
   };
 
   console.log({formData})
