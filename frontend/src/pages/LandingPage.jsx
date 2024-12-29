@@ -1,11 +1,15 @@
 import { User, Globe, MessageSquare, Video, Earth, HandCoins, Languages } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Hero from "../components/img/Hero.jpg"
 import { useThemeStore } from "../store/useThemeStore";
 import { THEMES } from "../constants";
 import { useTranslation } from "react-i18next";
 
 const LandingPage = () => {
+    const navigate = useNavigate();
+    const handleGetStarted = () => {
+        navigate('/signup'); // Navigate to the signup page
+      };
     const { theme, setTheme } = useThemeStore();
     const { t, i18n } = useTranslation();
     const changeLanguage = (lng) => {
@@ -24,7 +28,7 @@ const LandingPage = () => {
         <p className="py-6">
         Connect. Learn. Communicate.
         </p>
-        <button className="btn btn-primary">Get Started</button>
+        <button className="btn btn-primary" onClick={handleGetStarted}>Get Started</button>
         </div>
         </div>
       </div>
