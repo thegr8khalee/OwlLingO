@@ -16,7 +16,7 @@ const ThemePage = () => {
   };
 
   return (
-    <div className="h-screen container mx-auto px-4 pt-20 max-w-5xl">
+    <div className="h-full container mx-auto px-4 pt-20 max-w-5xl">
       <div className="space-y-6">
         <div className="flex flex-col gap-1">
         <select className="select select-bordered w-full max-w-xs ml-auto mr-auto"

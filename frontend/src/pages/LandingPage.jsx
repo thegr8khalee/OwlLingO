@@ -24,11 +24,11 @@ const LandingPage = () => {
         src={Hero}
         className="max-w-xsm sm:max-w-md rounded-lg shadow-2xl" />
         <div>
-        <h1 className="text-5xl font-bold">Unleash Your Linguistic Wings!</h1>
+        <h1 className="text-5xl font-bold">{t('heroTitle')}</h1>
         <p className="py-6">
-        Connect. Learn. Communicate.
+        {t('heroText')}
         </p>
-        <button className="btn btn-primary" onClick={handleGetStarted}>Get Started</button>
+        <button className="btn btn-primary" onClick={handleGetStarted}>{t('getStarted1')}</button>
         </div>
         </div>
       </div>
@@ -36,34 +36,34 @@ const LandingPage = () => {
       {/* Features Section */}
       <section className="py-16 bg-base-200">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">Why Choose OwlLingo?</h2>
+          <h2 className="text-3xl font-bold mb-8">{t('whyChooseTitle')}</h2>
           <div className="grid gap-8 md:grid-cols-4">
             <div className="feature-card p-6 shadow-lg rounded-lg bg-base-100">
               <Globe className="w-10 h-10 mx-auto" />
-              <h3 className="mt-4 text-xl font-bold">Global Connections</h3>
+              <h3 className="mt-4 text-xl font-bold">{t('globalConnections')}</h3>
               <p className="mt-2 text-sm">
-                Meet native speakers from around the world and expand your horizons.
+              {t('globalConnectionsText')}
               </p>
             </div>
             <div className="feature-card p-6 shadow-lg rounded-lg bg-base-100">
               <MessageSquare className="w-10 h-10 mx-auto" />
-              <h3 className="mt-4 text-xl font-bold">Real-Time Chat</h3>
+              <h3 className="mt-4 text-xl font-bold">{t('realTimeChat')}</h3>
               <p className="mt-2 text-sm">
-                Chat with friends online in real-time.
+              {t('realTimeChatText')}
               </p>
             </div>
             <div className="feature-card p-6 shadow-lg rounded-lg bg-base-100">
               <Video className="w-10 h-10 mx-auto" />
-              <h3 className="mt-4 text-xl font-bold">Organise Video Meetings</h3>
+              <h3 className="mt-4 text-xl font-bold">{t('organizeMeetings')}</h3>
               <p className="mt-2 text-sm">
-                Schedule video meetings with learners.
+              {t('organizeMeetingsText')}
               </p>
             </div>
             <div className="feature-card p-6 shadow-lg rounded-lg bg-base-100">
               <User className="w-10 h-10 mx-auto" />
-              <h3 className="mt-4 text-xl font-bold">Personalized matching</h3>
+              <h3 className="mt-4 text-xl font-bold">{t('personalizedMatching')}</h3>
               <p className="mt-2 text-sm">
-                Meet users that will benefit you in your learning journey.
+              {t('personalizedMatchingText')}
               </p>
             </div>
           </div>
@@ -72,19 +72,19 @@ const LandingPage = () => {
 
       {/** How to use */}
       <section className="py-16 bg-base-200">
-      <h2 className="text-3xl font-bold mb-8 text-center">How To Use OwlLingO</h2>
+      <h2 className="text-3xl font-bold mb-8 text-center">{t('howToUseTitle')}</h2>
       <ul className="steps flex justify-center items-center">
-        <li className="step step-primary">SignUp</li>
-        <li className="step step-primary">Add Friends</li>
-        <li className="step step-primary">Chat</li>
-        <li className="step step-primary">Organize Meetings</li>
+        <li className="step step-primary">{t('signUp')}</li>
+        <li className="step step-primary">{t('addFriends')}</li>
+        <li className="step step-primary">{t('chat')}</li>
+        <li className="step step-primary">{t('organizeMeetingsStep')}</li>
       </ul>
       </section>
 
 
       {/** themes */}
-      <h2 className="text-3xl font-bold mb-8 text-center pt-20 pb-0">Personalize Your Experience</h2>
-      <p className="text-center pb-10">Choose from 32 themes</p>
+      <h2 className="text-3xl font-bold mb-8 text-center pt-20 pb-0">{t('personalizeExperience')}</h2>
+      <p className="text-center pb-10">{t('chooseFromThemes')}</p>
       <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-6 md:grid-rows-6 md:ml-60 md:mr-60 gap-2 pb-20">
                 {THEMES.map((t) => (
                   <button
@@ -111,7 +111,7 @@ const LandingPage = () => {
               </div>
 
       {/** Language */}
-      <h2 className="text-3xl font-bold mb-8 text-center pt-20 pb-0">Personalize To Your Preferred Language</h2>
+      <h2 className="text-3xl font-bold mb-8 text-center pt-20 pb-0">{t('personalize')}</h2>
       <div className="flex flex-col gap-1 pb-20">
         <select className="select select-bordered w-full max-w-xs ml-auto mr-auto"
               onChange={(e) => changeLanguage(e.target.value)}>
@@ -137,27 +137,27 @@ const LandingPage = () => {
       {/** Benefits */}
       <section className="py-16 bg-base-200">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">Benefits</h2>
+          <h2 className="text-3xl font-bold mb-8">{t('benefitsTitle')}</h2>
           <div className="grid gap-8 md:grid-cols-3">
             <div className="feature-card p-6 shadow-lg rounded-lg bg-base-100">
               <Languages className="w-10 h-10 mx-auto" />
-              <h3 className="mt-4 text-xl font-bold">Immersive language learning</h3>
+              <h3 className="mt-4 text-xl font-bold">{t('immersiveLearning')}</h3>
               <p className="mt-2 text-sm">
-                Learn From Native Speakers.
+              {t('immersiveLearningText')}
               </p>
             </div>
             <div className="feature-card p-6 shadow-lg rounded-lg bg-base-100">
               <Earth className="w-10 h-10 mx-auto" />
-              <h3 className="mt-4 text-xl font-bold">Bridging cultural gaps</h3>
+              <h3 className="mt-4 text-xl font-bold">{t('bridgingGaps')}</h3>
               <p className="mt-2 text-sm">
-                Learn Cultures From Natives.
+              {t('bridgingGapsText')}
               </p>
             </div>
             <div className="feature-card p-6 shadow-lg rounded-lg bg-base-100">
               <HandCoins className="w-10 h-10 mx-auto" />
-              <h3 className="mt-4 text-xl font-bold">Free To Use</h3>
+              <h3 className="mt-4 text-xl font-bold">{t('freeToUse')}</h3>
               <p className="mt-2 text-sm">
-                OwlLingO is 100% Free!
+              {t('freeToUseText')}
               </p>
             </div>
           </div>
@@ -167,25 +167,25 @@ const LandingPage = () => {
       {/* Testimonials Section */}
       <section className="py-16 bg-base-200">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">What Our Users Say</h2>
+          <h2 className="text-3xl font-bold mb-8">{t('testimonialsTitle')}</h2>
           <div className="grid gap-8 md:grid-cols-3">
             <div className="testimonial-card p-6 shadow-lg rounded-lg bg-base-100">
               <p className="text-sm italic">
-                OwlLingo helped me speak Spanish fluently in just 3 months!
+              {t('testimonial1Text')}
               </p>
-              <h3 className="mt-4 font-bold">- Jane Doe</h3>
+              <h3 className="mt-4 font-bold">{t('testimonial1Name')}</h3>
             </div>
             <div className="testimonial-card p-6 shadow-lg rounded-lg bg-base-100">
               <p className="text-sm italic">
-                The best platform to meet native speakers and learn languages.
+              {t('testimonial2Text')}
               </p>
-              <h3 className="mt-4 font-bold">- John Smith</h3>
+              <h3 className="mt-4 font-bold">{t('testimonial2Name')}</h3>
             </div>
             <div className="testimonial-card p-6 shadow-lg rounded-lg bg-base-100">
               <p className="text-sm italic">
-                Interactive and immersive. Highly recommended for learners.
+              {t('testimonial3Text')}
               </p>
-              <h3 className="mt-4 font-bold">- Maria Gomez</h3>
+              <h3 className="mt-4 font-bold">{t('testimonial3Name')}</h3>
             </div>
           </div>
         </div>
@@ -194,15 +194,15 @@ const LandingPage = () => {
       {/* Call-to-Action Section */}
       <section className="py-16 bg-base-300 text-center">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-4">Ready to Start Your Journey?</h2>
+          <h2 className="text-3xl font-bold mb-4">{t('ctaTitle')}</h2>
           <p className="text-lg">
-            Join thousands of learners and unlock new opportunities today.
+          {t('ctaText')}
           </p>
           <Link
             to="/signup"
             className="mt-6 inline-block bg-primary btn-primary font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-secondary transition duration-300"
           >
-            Sign Up Now
+            {t('ctaButton')}
           </Link>
         </div>
       </section>
@@ -210,7 +210,7 @@ const LandingPage = () => {
       {/* Footer */}
       <footer className="py-8 bg-base-300  text-center">
         <div className="container mx-auto px-4">
-          <p>&copy; {new Date().getFullYear()} OwlLingo. All rights reserved.</p>
+          <p>&copy; {t('footerText', { year: new Date().getFullYear() })}</p>
         </div>
       </footer>
     </div>
