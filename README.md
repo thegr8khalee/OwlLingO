@@ -125,4 +125,4 @@ Start a video call using the google meet button.
 
 ## License
 
-This project is licensed under the Propriety License - see the [LICENSE](LICENSE.txt) file for details.
+This project is licensed under the PROPRIETARY LICENSE - see the [LICENSE](LICENSE.txt) file for details.
