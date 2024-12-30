@@ -1,19 +1,24 @@
 
 
-# OwlLingO
+# OwlLingO: Unleash Your Linguistic Wings
 
 ## Overview
 
-This project showcases the capabilities and expertise of a Full-Stack Software Engineer, covering both front-end and back-end development with a focus on scalable architecture, real-time communication, secure authentication, and robust UI/UX design. The platform connects users, leverages modern technologies, and implements best practices for both development and deployment.
+OwlLingo is a global social platform designed to connect individuals seeking to learn new languages with native speakers willing to share their expertise. During signup, users specify their native language and the language they wish to learn. Based on these preferences, the platform matches learners with native speakers who volunteer to engage in conversations through chat or video calls. By fostering direct interaction with native speakers, OwlLingo emphasizes immersive, real-world communication as the most effective method for mastering a new language, bridging cultures, and building meaningful global connections.
 
 ## Key Features
 
-- **Real-Time Communication:** Utilizes WebRTC and Socket.io for peer-to-peer chat and video calls.
+- **Real-Time Communication:** Utilizes Socket.io for peer-to-peer chat.
 - **Secure Authentication:** Implements JWT and session-based authentication for secure user login and registration.
 - **State Management:** Employs Zustand for seamless state management on the front-end.
 - **Responsive Design:** Tailored user interface using TailwindCSS and DaisyUI for flexible, mobile-first design.
 - **Cloud Storage:** Integration with Cloudinary for image and file uploading.
 - **Testing & Validation:** Postman for API testing and validation of endpoints.
+- **i18n:** OwlLingO is translated to 10 languages.
+- **Personalization:** OwlLingO has 32 themes users can choose from.
+- **Personalized Matching:** Friend suggestions.
+
+
 
 ## Technologies & Tools
 
@@ -33,10 +38,31 @@ This project showcases the capabilities and expertise of a Full-Stack Software E
 - **TailwindCSS** for utility-first responsive design
 - **DaisyUI** for pre-styled UI components that speed up development
 
+### Architecture Overview
+The OwlLingO project follows a modular architecture with clear separation of concerns:
+
+**Frontend:**
+
+Hosted with Vite for fast development.
+State managed using Zustand.
+UI styled with TailwindCSS and DaisyUI.
+
+**Backend:**
+
+RESTful API built with Express.
+Handles authentication, user matching, and video call setup.
+Real-Time Communication:
+
+Socket.io enable real-time chat.
+
+**Database:**
+
+MongoDB stores user data, language preferences, and message details.
+
 ### Development
 - **Git** for version control
 
-## Installation
+## Setup Instructions
 
 ### Clone the Repository
 ```bash
@@ -45,6 +71,14 @@ cd project-name
 ```
 
 ### Install Dependencies
+
+**Prerequisites**
+Ensure the following are installed on your system:
+
+Node.js (version 18+)
+MongoDB
+Git
+
 ```bash
 # For backend
 cd backend
@@ -74,18 +108,21 @@ cd frontend
 npm run dev
 ```
 
-## Challenges Overcome
+### Usage Guidelines
 
-- **Real-time communication**: Implementing WebRTC for seamless peer-to-peer interactions.
-- **Scalable state management**: Using Zustand to manage state without the overhead of Redux.
-- **Authentication & security**: Ensuring secure authentication and authorization using JWT.
+**Sign Up:** Create an account and specify your native and target languages.
+**Get Matched:** View suggested partners who match your language preferences or search for users and send a friend request.
+**Communicate:**
+Chat via the messaging interface.
+Start a video call using the google meet button.
+**Log Out:** Safely log out of your account when done
+
 
 ## Future Improvements
 
 - Implement additional features like voice translation.
 - Optimize the UI/UX for accessibility and better user engagement.
-- Implement automated testing with Jest and CI/CD pipeline for smoother deployments.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
+This project is licensed under the PROPRIETARY LICENSE - see the [LICENSE](LICENSE.txt) file for details.
