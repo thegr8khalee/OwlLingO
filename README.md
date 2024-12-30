@@ -1,6 +1,6 @@
 
 
-# OwlLingO
+# OwlLingO: Unleash Your Linguistic Wings
 
 ## Overview
 
@@ -38,10 +38,31 @@ OwlLingo is a global social platform designed to connect individuals seeking to 
 - **TailwindCSS** for utility-first responsive design
 - **DaisyUI** for pre-styled UI components that speed up development
 
+### Architecture Overview
+The OwlLingO project follows a modular architecture with clear separation of concerns:
+
+**Frontend:**
+
+Hosted with Vite for fast development.
+State managed using Zustand.
+UI styled with TailwindCSS and DaisyUI.
+
+**Backend:**
+
+RESTful API built with Express.
+Handles authentication, user matching, and video call setup.
+Real-Time Communication:
+
+Socket.io enable real-time chat.
+
+**Database:**
+
+MongoDB stores user data, language preferences, and message details.
+
 ### Development
 - **Git** for version control
 
-## Installation
+## Setup Instructions
 
 ### Clone the Repository
 ```bash
@@ -50,6 +71,14 @@ cd project-name
 ```
 
 ### Install Dependencies
+
+**Prerequisites**
+Ensure the following are installed on your system:
+
+Node.js (version 18+)
+MongoDB
+Git
+
 ```bash
 # For backend
 cd backend
@@ -79,18 +108,21 @@ cd frontend
 npm run dev
 ```
 
-## Challenges Overcome
+### Usage Guidelines
 
-- **Real-time communication**: Implementing WebRTC for seamless peer-to-peer interactions.
-- **Scalable state management**: Using Zustand to manage state without the overhead of Redux.
-- **Authentication & security**: Ensuring secure authentication and authorization using JWT.
+**Sign Up:** Create an account and specify your native and target languages.
+**Get Matched:** View suggested partners who match your language preferences or search for users and send a friend request.
+**Communicate:**
+Chat via the messaging interface.
+Start a video call using the google meet button.
+**Log Out:** Safely log out of your account when done
+
 
 ## Future Improvements
 
 - Implement additional features like voice translation.
 - Optimize the UI/UX for accessibility and better user engagement.
-- Implement automated testing with Jest and CI/CD pipeline for smoother deployments.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
+This project is licensed under the Propriety License - see the [LICENSE](LICENSE.txt) file for details.
