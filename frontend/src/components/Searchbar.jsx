@@ -11,6 +11,8 @@ const Searchbar = () => {
 
   console.log({searchResult})
   console.log({totalPages})
+  console.log({currentPage})
+
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -43,7 +45,7 @@ const Searchbar = () => {
     <div className="space-y-4">
         <h3 className="text-center text-lg font-semibold">{t("searchFilters")}</h3>
         {/* <p className="text-center">Add at least one filter</p> */}
-    <div className="flex items-center gap-4">
+    <div className="flex-row items-center gap-4">
         <form onSubmit={handleSubmit} className="space-y-6">
         <input type="text" placeholder={t("namePlaceholder")} className="input input-bordered w-full max-w-full" 
           value={formData.fullName}
@@ -57,8 +59,9 @@ const Searchbar = () => {
         <button type="submit" className="btn btn-primary w-full">
           <Search/>
         </button>
-         {/* Pagination Controls */}
-      {totalPages > 1 && (
+        </form>
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
         <div className="flex justify-between items-center mt-4">
           <button
             className="btn btn-primary"
@@ -79,7 +82,6 @@ const Searchbar = () => {
           </button>
         </div>
       )}
-        </form>
     </div>
     </div>
   )

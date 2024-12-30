@@ -21,6 +21,8 @@ export const searchUsers = async (req, res) => {
       _id: { $ne: myId },
     });
 
+    console.log(totalCount)
+
     const result = await User.find({
       ...searchParams,
       _id: { $ne: myId },
