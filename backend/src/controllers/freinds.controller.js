@@ -60,14 +60,15 @@ export const suggestUsers = async (req, res) => {
     if (!me) return res.status(400).json({ message: 'Cant find me in the db' });
     const suggestedUsers = await User.find({
       $or: [
-        { nativeLang: me.langToLearn },
-        { langToLearn: me.nativeLang },
+        { nativeLang: {$regex: new RegExp(me.langToLearn, 'i') } },
+        { langToLearn: { $regex: new RegExp(me.nativeLang, 'i') } },
       ],
-    }).limit(10);   
+    }).limit(10);
+    // console.log(suggestedUsers) 
     if (!suggestedUsers)
       return res.status(400).json({ message: 'Cant find suggetsed Users' });
 
-    const filtered = suggestedUsers.filter((user) => {
+    const filtered = await suggestedUsers.filter((user) => {
       return (
         !user.friendReq.includes(myId) &&
         !user.friends.includes(myId) &&
@@ -75,6 +76,7 @@ export const suggestUsers = async (req, res) => {
       );
     });
 
+    // console.log(filtered)
     res.status(200).json(filtered);
   } catch (error) {
     console.log('Error in find suggested Users', error);

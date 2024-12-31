@@ -192,7 +192,7 @@ const LandingPage = () => {
       </section>
 
       {/* Call-to-Action Section */}
-      <section className="py-16 bg-base-300 text-center">
+      <section className="py-16 bg-base-200 text-center">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-4">{t('ctaTitle')}</h2>
           <p className="text-lg">
