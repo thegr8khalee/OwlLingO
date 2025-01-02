@@ -75,7 +75,7 @@ export const useChatStore = create((set, get) => ({
     try {
       await axiosInstance.put(`/message/mark-read/${id}`)
     } catch (error) {
-      toast.error.apply(error.response.data.message)
+      toast.success(error.response.data.message)
     }
   }
 }));
