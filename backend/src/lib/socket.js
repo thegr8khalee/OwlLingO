@@ -31,7 +31,7 @@ io.on('connection', (socket) => {
   // Emit the socket ID to the connected user
   socket.emit('me', socket.id);
 
-  // Handle video call-related events
+  // Handle video call-related events (un-used)
   socket.on('calluser', ({ userToCall, signalData, from, name }) => {
     io.to(userToCall).emit('calluser', { signal: signalData, from, name });
   });
